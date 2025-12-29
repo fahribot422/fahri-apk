@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Locked</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: monospace;
+}
+
+body {
+  background: black;
+  color: red;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Efek glitch */
+.glitch {
+  position: relative;
+  font-size: 22px;
+  text-align: center;
+  animation: glitch 1s infinite;
+}
+
+@keyframes glitch {
+  0% { text-shadow: 2px 2px red; }
+  20% { text-shadow: -2px -2px lime; }
+  40% { text-shadow: 2px -2px blue; }
+  60% { text-shadow: -2px 2px red; }
+  80% { text-shadow: 2px 2px lime; }
+  100% { text-shadow: none; }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.warning {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.text {
+  font-size: 18px;
+  text-align: center;
+  color: #ff5555;
+}
+
+.scan {
+  margin-top: 30px;
+  font-size: 14px;
+  color: lime;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 999;
+}
+</style>
+</head>
+
+<body>
+<div class="overlay"></div>
+
+<div class="container">
+  <div class="warning glitch">⚠ SYSTEM ERROR ⚠</div>
+
+  <div class="text">
+    <p>HP ANDA TELAH DIKUNCI</p>
+    <br>
+    <p>Untuk membukanya segera hubungi</p>
+    <p><b>FAHRI</b></p>
+  </div>
+
+  <div class="scan">
+    Scanning system files...<br>
+    Virus detected...<br>
+    Access denied...
+  </div>
+</div>
+
+<script>
+// getar biar makin serem (kalau didukung)
+if (navigator.vibrate) {
+  setInterval(() => {
+    navigator.vibrate(300);
+  }, 2000);
+}
+
+// cegah klik kanan & back (prank visual)
+document.addEventListener("contextmenu", e => e.preventDefault());
+history.pushState(null, null, location.href);
+window.onpopstate = function () {
+  history.go(1);
+};
+</script>
+</body>
+</html>
